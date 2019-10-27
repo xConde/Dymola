@@ -119,7 +119,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 4e779cf1212add04a90b9566bfed481e, type: 2}
 --- !u!1 &5055703
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 9.1837e-41, y: -3.38e-43, z: 1.19e-43, w: NaN}
+  m_BoundingSphereOverride: {x: 0, y: -1.8191157e-33, z: 8.14e-43, w: -1.8191157e-33}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -277,7 +278,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -293,8 +294,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -317,13 +318,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.20533134, y: 0.7248502, z: -0.24367957, w: -0.6107795}
-  m_LocalPosition: {x: 5.1099997, y: 4.7752995, z: 2.3382006}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 1, y: 15, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76b4fbc055b2a0489531440efcaad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1403241326}
+  smoothing: 5
 --- !u!1001 &1399925139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,16 +360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: dabe785652974464da4314697437cf4a, type: 2}
+      objectReference: {fileID: 9100000, guid: 45dc21ad5d48de642b56c21e5288689c, type: 2}
     - target: {fileID: -6057140222963153312, guid: dda484b1e0a5ec3408654713c2bfc8b5,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'Hips'\n\tTransform 'Spine1'\n\tTransform 'Neck'\n\tTransform
-        'LeftFoot'\n\tTransform 'RightArm'\n\tTransform 'LeftHand'\n\tTransform 'LeftUpLeg'\n\tTransform
-        'RightLeg'\n\tTransform 'Spine2'\n\tTransform 'RightShoulder'\n\tand more
-        ...\n\tFrom animation clip 'Slash'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dda484b1e0a5ec3408654713c2bfc8b5,
         type: 3}
@@ -364,7 +374,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: dda484b1e0a5ec3408654713c2bfc8b5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dda484b1e0a5ec3408654713c2bfc8b5,
         type: 3}
@@ -419,6 +429,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1399925139}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1403241326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: dda484b1e0a5ec3408654713c2bfc8b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1399925139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1403241327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,26 +455,23 @@ MonoBehaviour:
   takenDamageCooldown: 1.5
   timeSinceTakenDamage: 0
   currentweapon: pistol
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 6
   attackInput: 0
   movement:
     baseForwardVelocity: 10
     baseJumpVelocity: 25
     forwardVelocity: 10
+    sideVelocity: 10
     rotateVelocity: 100
     jumpVelocity: 25
-    distanceToGround: 0.02
-    ground:
-      serializedVersion: 2
-      m_Bits: 0
-  physics:
-    isGrounded: 0
-    downAcceleration: 2
   input:
     inputDelay: 0.01
     FORWARD_AXIS: Vertical
     TURN_AXIS: Horizontal
-    JUMP_AXIS: Jump
-    AUTO_ATTACK: Attack
+    AUTO_ATTACK: Fire1
 --- !u!54 &1403241328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -468,12 +481,12 @@ Rigidbody:
   m_GameObject: {fileID: 1403241324}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &1403241329
 CapsuleCollider:
@@ -524,7 +537,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1607876182
 BoxCollider:
@@ -592,7 +605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607876181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 25}
   m_Children: []
   m_Father: {fileID: 0}

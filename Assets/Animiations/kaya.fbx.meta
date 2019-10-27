@@ -16,9 +16,10 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid copied Avatar Rig Configuration:\n\tNo human bone found.
+      Ensure both rig type match\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -31,7 +32,11 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm
+    - Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm
+    - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm
+    - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16

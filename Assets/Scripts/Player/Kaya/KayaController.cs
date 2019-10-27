@@ -19,9 +19,16 @@ public class KayaController : MonoBehaviour
     //Weapon
     public string currentweapon = "pistol";
 
+    //raycasting
+    float camRayLength = 100f;
+    int floorMask;
+    public LayerMask ground;
+
+    //movement
+    public float speed = 6f;
+
     //Player input
     Animator anim;
-    Quaternion targetRotation;
     Rigidbody rBody;
     float forwardInput;
     float turnInput;
@@ -30,27 +37,19 @@ public class KayaController : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     Bounds bounds;
 
-    //Quaternion used to represent rotations
-    public Quaternion TargetRotation { get { return targetRotation; } }
 
     // === Serializable fields
     [System.Serializable]
     public class MovementSettings {
+        Vector3 move;
         public float baseForwardVelocity = 10;
         public float baseJumpVelocity = 25;
 
         public float forwardVelocity = 10;
+        public float sideVelocity = 10;
         public float rotateVelocity = 100;
         public float jumpVelocity = 25;
 
-        public float distanceToGround = 0.02f;
-        public LayerMask ground;
-    }
-
-    [System.Serializable]
-    public class PhysicsSettings {
-        public bool isGrounded;
-        public float downAcceleration = 2f;
     }
 
     [System.Serializable]
@@ -58,106 +57,85 @@ public class KayaController : MonoBehaviour
         public float inputDelay = 0.01f;
         public string FORWARD_AXIS = "Vertical";
         public string TURN_AXIS = "Horizontal";
-        public string JUMP_AXIS = "Jump";
         public string AUTO_ATTACK = "Fire1";
     }
 
     public MovementSettings movement = new MovementSettings();
-    public PhysicsSettings physics = new PhysicsSettings();
     public InputSettings input = new InputSettings();
 
     //Serializable fields END ===
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        bounds = new Bounds(new Vector3(0, 0, 0), new Vector3(1f, 1f, 1f));
-        targetRotation = transform.rotation;
+        //Create a lawyer mask for the floor layer.
+        floorMask = LayerMask.GetMask("Floor");
 
-        hitpoints = GetComponent<Health>();
+        //Animiation
         anim = GetComponent<Animator>();
-        anim.SetFloat("VelocityForward", 0);
-
         checkRigidBody();
 
+
+        //Movement
         attackInput = jumpInput = turnInput = forwardInput = 0;
+        anim.SetFloat("VelocityForward", 0);
+
+        //bounds
+        bounds = new Bounds(new Vector3(0, 0, 0), new Vector3(1f, 1f, 1f));
+
+        //hitpoints
+        hitpoints = GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
-      //  updateHPBar();
-
-        if (isAlive)
-        {
-            GetInput();
-            Turn();
-            checkAlive();
-        }
-        else {
-            anim.SetTrigger("Dead");
-            velocity.z = 0f;
-        }
-        
+      //  updateHPBar();     
     }
 
     // FixedUpdate called less than Update
     private void FixedUpdate()
     {
-        if (isAlive) {
-            Run();
-            Jump();
-            Attack();
-
-            rBody.velocity = transform.TransformDirection(velocity);
-        }
-    }
-
-    // Gets input from user
-    void GetInput() {
         forwardInput = Input.GetAxis(input.FORWARD_AXIS);
         turnInput = Input.GetAxis(input.TURN_AXIS);
-        jumpInput = Input.GetAxis(input.JUMP_AXIS);
         attackInput = Input.GetAxis(input.AUTO_ATTACK);
+
+        if (isAlive) {
+            Move(turnInput, forwardInput);
+            Turn();
+            Attack();
+            Animiating(forwardInput, turnInput);
+        }
     }
 
+
+
     // === Movement
-    void Run() {
-        if (Mathf.Abs(forwardInput) > input.inputDelay)
-        {
-            velocity.z = movement.forwardVelocity * forwardInput;
-            anim.SetFloat("VelocityForward", velocity.z);
-        }
-        else {
-            velocity.z = 0;
-            anim.SetFloat("VelocityForward", 0);
-        }
+    void Move(float h, float v) {
+        velocity.Set(h, 0f, v);
+        velocity = velocity.normalized * speed * Time.deltaTime;
+        anim.SetFloat("VelocityForward", v);
+        anim.SetFloat("VelocitySide", h);
+        rBody.MovePosition(transform.position + velocity);
     }
 
     void Turn() {
-        if (Mathf.Abs(turnInput) > input.inputDelay) 
-            targetRotation *= Quaternion.AngleAxis(movement.rotateVelocity * turnInput * Time.deltaTime, Vector3.up);
-        transform.rotation = targetRotation;
-    }
+        //create a ray from the mouse cursor on screen in the direction of the camera
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-    bool Grounded() {
-        physics.isGrounded = Physics.Raycast(transform.position, Vector3.down, movement.distanceToGround, movement.ground);
-        if (physics.isGrounded)
-            anim.SetBool("isGrounded", true);
-        else
-            anim.SetBool("isGrounded", false);
-        return physics.isGrounded;
-    }
+        //create a raycastHit variable to store information about what was hit by the ray.
+        RaycastHit floorHit;
 
-    void Jump() {
-        if ((jumpInput > 0) && Grounded())
-            velocity.y = movement.jumpVelocity;
-        else if ((jumpInput == 0) && Grounded())
-            velocity.y = 0;
-        else
-            velocity.y -= physics.downAcceleration;
-    }
+        //perform the raycast and if it hits something on the floor layer
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask)) {
+            Vector3 playerToMouse = floorHit.point - transform.position;
 
+            playerToMouse.y = 0f;
+
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            rBody.MoveRotation(newRotation);
+        }
+    }
     // Movement END ===
 
     // Player attack
@@ -198,6 +176,12 @@ public class KayaController : MonoBehaviour
     }
 
     // Damage to player END === 
+
+    void Animiating(float h, float v) {
+        bool moving = h != 0f || v != 0f;
+
+        anim.SetBool("IsMoving", moving);
+    }
 
     // === Resets & Updates
     void resetSpeed() { movement.forwardVelocity = movement.baseForwardVelocity; }
