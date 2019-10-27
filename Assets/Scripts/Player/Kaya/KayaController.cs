@@ -17,7 +17,7 @@ public class KayaController : MonoBehaviour
     public float timeSinceTakenDamage = 0.0f;
 
     //Weapon
-    public string currentweapon = "pistol";
+    public string currentweapon = "Sword";
 
     //raycasting
     float camRayLength = 100f;
@@ -142,8 +142,8 @@ public class KayaController : MonoBehaviour
     void Attack() {
         if (attackInput > 0 && isAllowedToAttack) {
             anim.SetTrigger("Slash");
-            if (Equals(currentweapon, "magic"))
-                //TBD
+            if (Equals(currentweapon, "staff"))
+              //  MagicScript.Mage();
             isAllowedToAttack = false;
             Invoke("canDamage", 0.85f);
         }

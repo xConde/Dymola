@@ -5,6 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Floor
+  - EnemyProjectile
+  - PlayerProjectile
+  - Monster
+  - PowerUpSpeed
+  - PowerUpInvincible
+  - PowerUpHeal
+  - EnemyWeapon
+  - Sword
+  - Maule
+  - Staff
   layers:
   - Default
   - TransparentFX
@@ -14,10 +25,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Sword
+  - Maule
+  - Staff
   - 
   - 
   - 
