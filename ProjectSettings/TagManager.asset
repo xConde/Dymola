@@ -16,6 +16,10 @@ TagManager:
   - Sword
   - Maule
   - Staff
+  - Shootable
+  - SwordUI
+  - MauleUI
+  - StaffUI
   layers:
   - Default
   - TransparentFX
@@ -29,8 +33,8 @@ TagManager:
   - Sword
   - Maule
   - Staff
-  - 
-  - 
+  - Shootable
+  - Monster
   - 
   - 
   - 
