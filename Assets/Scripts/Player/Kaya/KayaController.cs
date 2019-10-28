@@ -25,7 +25,7 @@ public class KayaController : MonoBehaviour
     public LayerMask ground;
 
     //movement
-    public float speed = 6f;
+    public float speed = 12f;
 
     //Player input
     Animator anim;

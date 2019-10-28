@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int startingHealth = 300;
-    public int extraHealthMultiplier = 1;
+    public int extraHealthMultiplier = 2;
     public int currentHealth;
     public int minimumHealth = 0;
     public bool isDead;
@@ -44,16 +44,12 @@ public class Health : MonoBehaviour
 
     public void resetHealth() {
         GameObject levelText = GameObject.FindWithTag("LevelCounter");
-       // currentLevel = levelText.GetComponent<LevelScript>().levelVariation;
+        currentLevel = levelText.GetComponent<LevelScript>().levelVar;
 
         if (gameObject.tag.Equals("Player"))
             this.currentHealth = startingHealth;
         else
-        {
-            this.currentHealth += (currentLevel * extraHealthMultiplier);
-            if (currentHealth > startingHealth)
-                currentHealth = startingHealth;
-        }
+            this.currentHealth = startingHealth + (currentLevel * extraHealthMultiplier);
     }
 
     void checkLife() { if (currentHealth <= 0) isDead = true; }
