@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KayaController : MonoBehaviour
 {
-    //Max checks
+    //Kaya checks
     public Health hitpoints;
     public bool isAllowedToAttack = true;
     public bool isAlive = true;
