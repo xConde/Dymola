@@ -23,7 +23,27 @@ public class KayaAttack : MonoBehaviour
     void FixedUpdate()
     {
         attackInput = Input.GetAxis("Fire1");
+        AnimateStatus();
         Attack();
+    }
+
+    void AnimateStatus() {
+        if (Equals(currentweapon, "Pistol"))
+        {
+            anim.SetBool("HasPistol", true);
+            anim.SetBool("HasRifle", false);
+        }
+        else if (Equals(currentweapon, "Rifle"))
+        {
+            anim.SetBool("HasPistol", false);
+            anim.SetBool("HasRifle", true);
+        }
+        else if (Equals(currentweapon, "Maule"))
+        {
+            anim.SetBool("HasPistol", false);
+            anim.SetBool("HasRifle", false);
+        }
+            
     }
 
     void Attack()
@@ -31,9 +51,13 @@ public class KayaAttack : MonoBehaviour
         if (attackInput > 0 && isAllowedToAttack)
         {
             if (Equals(currentweapon, "Pistol"))
+            {
                 anim.SetTrigger("ShootPistol");
+            }
             else if (Equals(currentweapon, "Rifle"))
+            {
                 anim.SetTrigger("ShootRifle");
+            }
             else if (Equals(currentweapon, "Maule"))
                 anim.SetTrigger("Smash");
 

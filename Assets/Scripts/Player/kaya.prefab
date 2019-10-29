@@ -146,6 +146,7 @@ MonoBehaviour:
   Pistol: {fileID: 0}
   Rifle: {fileID: 975070987291858991}
   Maule: {fileID: 1909652558477659602}
+  currentWeapon: 
   weaponSwitchDelay: 1.25
   canSwitch: 0
   kaya: {fileID: 129184887}
@@ -897,6 +898,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.251
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.121
+      objectReference: {fileID: 0}
     - target: {fileID: 7569117818420593270, guid: 7b00e01809233844da35e91d6209222e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -952,22 +968,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.251
-      objectReference: {fileID: 0}
-    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.528
-      objectReference: {fileID: 0}
-    - target: {fileID: 7569117818420593266, guid: 7b00e01809233844da35e91d6209222e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.121
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7569117818430221714, guid: 7b00e01809233844da35e91d6209222e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7b00e01809233844da35e91d6209222e, type: 3}
 --- !u!1 &975070987291858991 stripped
 GameObject:
