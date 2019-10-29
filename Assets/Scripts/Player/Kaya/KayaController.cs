@@ -189,22 +189,6 @@ public class KayaController : MonoBehaviour
     void canDamage() { isAllowedToAttack = true;  }
     public void updateWeapon(string weaponName) { currentweapon = weaponName; }
 
-    /**
-    // === Hitpoints Bar
-    void updateHPBar() { hitpointsBar.fillAmount = ratioHP(hitpoints.currentHealth, hitpoints.minimumHealth, hitpoints.startingHealth, 0f, 1f);  }
-    float ratioHP(float currentHealth, float inMin, float inMax, float outMin, float outMax) {
-        return (currentHealth - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    }
-    // Hitpoints Bar END ===
-    */
-
-    void checkAlive() {
-        if (hitpoints.currentHealth <= 0) {
-            isAlive = false;
-            anim.SetTrigger("Dead");
-            gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0f, 2f, 0f);
-        }
-    } 
 
     // Resets & Updates END ===
 

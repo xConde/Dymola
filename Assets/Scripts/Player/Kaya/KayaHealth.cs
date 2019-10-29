@@ -15,8 +15,10 @@ public class KayaHealth : MonoBehaviour
 
 
     Animator anim;                                             
-    AudioSource playerAudio;                                    
-    KayaController kaya;                                        
+    AudioSource playerAudio;
+    KayaMovement movement;
+    KayaAttack attack;
+    PlayerShooting shooting;
     bool isDead;                                               
     bool damaged;                                               
 
@@ -25,7 +27,9 @@ public class KayaHealth : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
-        kaya = GetComponent<KayaController>();
+        movement = GetComponent<KayaMovement>();
+        attack = GetComponent<KayaAttack>();
+        shooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
     }
 
@@ -57,6 +61,8 @@ public class KayaHealth : MonoBehaviour
         anim.SetTrigger("Dead");
         playerAudio.clip = deathClip;
         playerAudio.Play();
-        kaya.enabled = false;
+        movement.enabled = false;
+        attack.enabled = false;
+        shooting.enabled = false;
     }
 }

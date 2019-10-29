@@ -10,7 +10,7 @@ public class WeaponManagement : MonoBehaviour
     string currentWeapon;
     public float weaponSwitchDelay = 1.25f;
     public bool canSwitch;
-    public KayaController kaya;
+    public KayaAttack kaya;
     public AudioSource switchSound;
 
     //Weapon Display UI
@@ -22,13 +22,9 @@ public class WeaponManagement : MonoBehaviour
     {
         //Display Sword UI by default
         SwordUI = GameObject.FindGameObjectWithTag("SwordUI");
-        SwordUI.SetActive(true);
-
         MauleUI = GameObject.FindGameObjectWithTag("MauleUI");
-        MauleUI.SetActive(false);
-
         StaffUI = GameObject.FindGameObjectWithTag("StaffUI");
-        StaffUI.SetActive(false);
+        WeaponOption1();
 
         canSwitch = true;
         switchSound = gameObject.GetComponent<AudioSource>();
@@ -58,38 +54,17 @@ public class WeaponManagement : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.Alpha1)) && !Sword.activeSelf)
             {
                 weaponStatus();
-                Sword.SetActive(true);
-                Maule.SetActive(false);
-                Staff.SetActive(false);
-
-                //UI
-                SwordUI.SetActive(true);
-                MauleUI.SetActive(false);
-                StaffUI.SetActive(false);
+                WeaponOption1();
             }
             else if ((Input.GetKeyDown(KeyCode.Alpha2)) && !Maule.activeSelf)
             {
                 weaponStatus();
-                Sword.SetActive(false);
-                Maule.SetActive(true);
-                Staff.SetActive(false);
-
-                //UI
-                SwordUI.SetActive(false);
-                MauleUI.SetActive(true);
-                StaffUI.SetActive(false);
+                WeaponOption2();
             }
             else if ((Input.GetKeyDown(KeyCode.Alpha3)) && !Staff.activeSelf)
             {
                 weaponStatus();
-                Sword.SetActive(false);
-                Maule.SetActive(false);
-                Staff.SetActive(true);
-
-                //UI
-                SwordUI.SetActive(false);
-                MauleUI.SetActive(false);
-                StaffUI.SetActive(true);
+                WeaponOption3();
             }
         }
     }
@@ -98,6 +73,39 @@ public class WeaponManagement : MonoBehaviour
         switchSound.Play();
         canSwitch = false;
         Invoke("setSwitchTrue", weaponSwitchDelay);
+    }
+
+    void WeaponOption1() {
+        Sword.SetActive(true);
+        Maule.SetActive(false);
+        Staff.SetActive(false);
+
+        //UI
+        SwordUI.SetActive(true);
+        MauleUI.SetActive(false);
+        StaffUI.SetActive(false);
+    }
+
+    void WeaponOption2() {
+        Sword.SetActive(false);
+        Maule.SetActive(true);
+        Staff.SetActive(false);
+
+        //UI
+        SwordUI.SetActive(false);
+        MauleUI.SetActive(true);
+        StaffUI.SetActive(false);
+    }
+
+    void WeaponOption3() {
+        Sword.SetActive(false);
+        Maule.SetActive(false);
+        Staff.SetActive(true);
+
+        //UI
+        SwordUI.SetActive(false);
+        MauleUI.SetActive(false);
+        StaffUI.SetActive(true);
     }
 
     void setSwitchTrue() { canSwitch = true; }

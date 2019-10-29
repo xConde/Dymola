@@ -8,20 +8,20 @@ public class SlashMelee : MonoBehaviour
     public int TankEnemyMultiplier = 9;
     public int BasicEnemyMultiplier = 2;
     public int MidtierEnemyMulitplier = 5;
-    public KayaController kaya;
-    public AudioSource aSource;
-    public AudioClip slashHitSolid;
+    public KayaAttack kaya;
+    public AudioSource slashHit;
 
     private void Start()
     {
-        aSource = gameObject.GetComponent<AudioSource>();
+        slashHit = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Monster") && (kaya.attackInput > 0))
         {
-            aSource.PlayOneShot(slashHitSolid, 1f);
+            Debug.LogError("Checking");
+            slashHit.Play();
             if (other.gameObject.GetComponent<AIGolem>())
             {
                 AIGolem golem = other.gameObject.GetComponent<AIGolem>();
