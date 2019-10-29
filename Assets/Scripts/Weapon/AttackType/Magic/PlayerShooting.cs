@@ -35,8 +35,8 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetButton("Fire1") && timer >= timeBetweenShot)
             Shoot();
 
-        if (timer >= timeBetweenShot * effectsDisplayTime)
-            DisableEffects();
+       // if (timer >= timeBetweenShot * effectsDisplayTime)
+            //DisableEffects();
     }
 
     public void DisableEffects()

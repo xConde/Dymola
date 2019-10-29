@@ -37,7 +37,6 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-
     public void TakeDamage(int amount, Vector3 hitPoint)
     {
         if (isDead)
@@ -48,6 +47,19 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= amount;
         hitParticles.transform.position = hitPoint;
         hitParticles.Play();
+
+        if (currentHealth <= 0)
+            Death();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        if (isDead)
+            return;
+
+        enemyAudio.Play();
+
+        currentHealth -= amount;
 
         if (currentHealth <= 0)
             Death();
