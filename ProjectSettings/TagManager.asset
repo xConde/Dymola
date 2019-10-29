@@ -20,6 +20,10 @@ TagManager:
   - SwordUI
   - MauleUI
   - StaffUI
+  - PistolUI
+  - RifleUI
+  - Pistol
+  - Rifle
   layers:
   - Default
   - TransparentFX

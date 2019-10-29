@@ -78,5 +78,7 @@ public class KayaMovement : MonoBehaviour
         bool moving = h != 0f || v != 0f;
 
         anim.SetBool("IsMoving", moving);
+
+
     }
 }

@@ -32,7 +32,7 @@ public class ExtendedFlycam : MonoBehaviour
 
 	void Start ()
 	{
-		Screen.lockCursor = true;
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	void Update ()

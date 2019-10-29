@@ -6,24 +6,26 @@ using UnityEngine.UI;
 
 public class WeaponManagement : MonoBehaviour
 {
-    public GameObject Sword, Maule, Staff;
-    string currentWeapon;
+    public GameObject Pistol, Rifle, Maule;
+    public string currentWeapon;
     public float weaponSwitchDelay = 1.25f;
     public bool canSwitch;
     public KayaAttack kaya;
     public AudioSource switchSound;
 
     //Weapon Display UI
-    GameObject SwordUI, MauleUI, StaffUI;
+    GameObject PistolUI, RifleUI, MauleUI;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //Display Sword UI by default
-        SwordUI = GameObject.FindGameObjectWithTag("SwordUI");
+        PistolUI = GameObject.FindGameObjectWithTag("PistolUI");
+        RifleUI = GameObject.FindGameObjectWithTag("RifleUI");
         MauleUI = GameObject.FindGameObjectWithTag("MauleUI");
-        StaffUI = GameObject.FindGameObjectWithTag("StaffUI");
+
+        //Start with pistol
         WeaponOption1();
 
         canSwitch = true;
@@ -38,12 +40,12 @@ public class WeaponManagement : MonoBehaviour
     }
 
     void checkCurrentWeapon() {
-        if (Sword.activeSelf)
-            currentWeapon = "Sword";
+        if (Pistol.activeSelf)
+            currentWeapon = "Pistol";
+        else if (Rifle.activeSelf)
+            currentWeapon = "Rifle";
         else if (Maule.activeSelf)
             currentWeapon = "Maule";
-        else if (Staff.activeSelf)
-            currentWeapon = "Staff";
         kaya.updateWeapon(currentWeapon);
     }
 
@@ -51,17 +53,17 @@ public class WeaponManagement : MonoBehaviour
         //if the player presses 1, 2, or 3 and is allowed to switch
         if ((Input.GetKeyDown(KeyCode.Alpha1)  || (Input.GetKeyDown(KeyCode.Alpha2)) || (Input.GetKeyDown(KeyCode.Alpha3))) && canSwitch) {
 
-            if ((Input.GetKeyDown(KeyCode.Alpha1)) && !Sword.activeSelf)
+            if ((Input.GetKeyDown(KeyCode.Alpha1)) && !Pistol.activeSelf)
             {
                 weaponStatus();
                 WeaponOption1();
             }
-            else if ((Input.GetKeyDown(KeyCode.Alpha2)) && !Maule.activeSelf)
+            else if ((Input.GetKeyDown(KeyCode.Alpha2)) && !Rifle.activeSelf)
             {
                 weaponStatus();
                 WeaponOption2();
             }
-            else if ((Input.GetKeyDown(KeyCode.Alpha3)) && !Staff.activeSelf)
+            else if ((Input.GetKeyDown(KeyCode.Alpha3)) && !Maule.activeSelf)
             {
                 weaponStatus();
                 WeaponOption3();
@@ -76,36 +78,36 @@ public class WeaponManagement : MonoBehaviour
     }
 
     void WeaponOption1() {
-        Sword.SetActive(true);
+        Pistol.SetActive(true);
+        Rifle.SetActive(false);
         Maule.SetActive(false);
-        Staff.SetActive(false);
 
         //UI
-        SwordUI.SetActive(true);
+        PistolUI.SetActive(true);
+        RifleUI.SetActive(false);
         MauleUI.SetActive(false);
-        StaffUI.SetActive(false);
     }
 
     void WeaponOption2() {
-        Sword.SetActive(false);
-        Maule.SetActive(true);
-        Staff.SetActive(false);
+        Pistol.SetActive(false);
+        Rifle.SetActive(true);
+        Maule.SetActive(false);
 
         //UI
-        SwordUI.SetActive(false);
-        MauleUI.SetActive(true);
-        StaffUI.SetActive(false);
+        PistolUI.SetActive(false);
+        RifleUI.SetActive(true);
+        MauleUI.SetActive(false);
     }
 
     void WeaponOption3() {
-        Sword.SetActive(false);
-        Maule.SetActive(false);
-        Staff.SetActive(true);
+        Pistol.SetActive(false);
+        Rifle.SetActive(false);
+        Maule.SetActive(true);
 
         //UI
-        SwordUI.SetActive(false);
-        MauleUI.SetActive(false);
-        StaffUI.SetActive(true);
+        PistolUI.SetActive(false);
+        RifleUI.SetActive(false);
+        MauleUI.SetActive(true);
     }
 
     void setSwitchTrue() { canSwitch = true; }

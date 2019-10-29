@@ -5,7 +5,7 @@ using UnityEngine;
 public class KayaAttack : MonoBehaviour
 {
     //Weapon
-    public string currentweapon = "Sword";
+    public string currentweapon;
 
     public float attackInput;
 
@@ -24,19 +24,18 @@ public class KayaAttack : MonoBehaviour
     {
         attackInput = Input.GetAxis("Fire1");
         Attack();
-
     }
 
     void Attack()
     {
         if (attackInput > 0 && isAllowedToAttack)
         {
-            if (Equals(currentweapon, "Sword"))
-                anim.SetTrigger("Slash");
+            if (Equals(currentweapon, "Pistol"))
+                anim.SetTrigger("ShootPistol");
+            else if (Equals(currentweapon, "Rifle"))
+                anim.SetTrigger("ShootRifle");
             else if (Equals(currentweapon, "Maule"))
                 anim.SetTrigger("Smash");
-            else if (Equals(currentweapon, "Staff"))
-                anim.SetTrigger("Cast");
 
             isAllowedToAttack = false;
             Invoke("canDamage", 0.85f);

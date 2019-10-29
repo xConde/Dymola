@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 7;                  
-    public float timeBetweenShot = 1.17f;        
-    public float range = 100f;                      
+    public float timeBetweenShot = .8f;        
+    public float range = 200f;                      
 
     float timer;                                    
     Ray shootRay;                                   
@@ -16,7 +16,7 @@ public class PlayerShooting : MonoBehaviour
     LineRenderer magicLine;                         
     AudioSource magicAudio;                          
     Light magicLight;                                
-    float effectsDisplayTime = 0.2f;                
+    float effectsDisplayTime = 0.2f;
 
     void Awake()
     {

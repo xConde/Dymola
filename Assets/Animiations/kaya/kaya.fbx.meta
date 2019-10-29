@@ -33,6 +33,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths:
     - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand
+    - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16

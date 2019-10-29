@@ -20,7 +20,6 @@ public class SlashMelee : MonoBehaviour
     {
         if (other.tag.Equals("Monster") && (kaya.attackInput > 0))
         {
-            Debug.LogError("Checking");
             slashHit.Play();
             if (other.gameObject.GetComponent<AIGolem>())
             {
@@ -39,7 +38,6 @@ public class SlashMelee : MonoBehaviour
                 AIMouseSpear mouse = other.gameObject.GetComponent<AIMouseSpear>();
                 if (mouse.isAbleToBeDamaged)
                     mouse.doMeleeDamage(attackPower * MidtierEnemyMulitplier);
-
             }
         }
     }
