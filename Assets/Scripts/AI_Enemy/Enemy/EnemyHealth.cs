@@ -9,12 +9,12 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;                   
     public float sinkSpeed = 2.5f;              
     public int scoreValue = 10;                 
-    public AudioClip deathClip;                 
+    public AudioClip deathClip;
 
+    public EnemyManager manager;
 
     Animator anim;                              
-    AudioSource enemyAudio;                     
-    ParticleSystem hitParticles;                
+    AudioSource enemyAudio;                                     
     CapsuleCollider capsuleCollider;            
     bool isDead;                                
     bool isSinking;                             
@@ -22,9 +22,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
+        manager = FindObjectOfType<EnemyManager>();
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
-        hitParticles = GetComponentInChildren<ParticleSystem>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         currentHealth = startingHealth;
@@ -35,21 +35,6 @@ public class EnemyHealth : MonoBehaviour
         if (isSinking)
             transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
 
-    }
-
-    public void TakeDamage(int amount, Vector3 hitPoint)
-    {
-        if (isDead)
-            return;
-
-        enemyAudio.Play();
-
-        currentHealth -= amount;
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
-
-        if (currentHealth <= 0)
-            Death();
     }
 
     public void TakeDamage(int amount)
@@ -71,9 +56,11 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         capsuleCollider.isTrigger = true;
         anim.SetTrigger("Dead");
-
+        ScoreManager.score += scoreValue;
+        manager.EnemyDefeated();
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
+        Destroy(gameObject, 2f);
     }
 
 
@@ -85,8 +72,6 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
 
         isSinking = true;
-
-        ScoreManager.score += scoreValue;
 
         Destroy(gameObject, 2f);
     }

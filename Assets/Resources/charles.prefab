@@ -762,8 +762,9 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   sinkSpeed: 2.5
-  scoreValue: 10
+  scoreValue: 20
   deathClip: {fileID: 8300000, guid: 2ed068703efea0645b97048977a87219, type: 3}
+  manager: {fileID: 0}
 --- !u!1 &2868254823928980443
 GameObject:
   m_ObjectHideFlags: 0

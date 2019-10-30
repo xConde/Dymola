@@ -29,7 +29,7 @@ public class KayaHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         movement = GetComponent<KayaMovement>();
         attack = GetComponent<KayaAttack>();
-        shooting = GetComponentInChildren<PlayerShooting>();
+        shooting = GetComponent<PlayerShooting>();
         currentHealth = startingHealth;
     }
 
@@ -63,6 +63,6 @@ public class KayaHealth : MonoBehaviour
         playerAudio.Play();
         movement.enabled = false;
         attack.enabled = false;
-        shooting.enabled = false;
+        Destroy(shooting);
     }
 }

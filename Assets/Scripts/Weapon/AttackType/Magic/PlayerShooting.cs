@@ -18,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
     Light magicLight;                                
     float effectsDisplayTime = 0.2f;
 
+
     void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
@@ -67,7 +68,7 @@ public class PlayerShooting : MonoBehaviour
             EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
 
             if (enemyHealth != null)
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                enemyHealth.TakeDamage(damagePerShot);
 
             magicLine.SetPosition(1, shootHit.point);
         }

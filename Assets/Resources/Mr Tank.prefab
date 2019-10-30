@@ -5591,7 +5591,7 @@ GameObject:
   - component: {fileID: 113665303392928596}
   - component: {fileID: 4673528767107113776}
   m_Layer: 12
-  m_Name: Mr Tank 1
+  m_Name: Mr Tank
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5737,8 +5737,9 @@ MonoBehaviour:
   startingHealth: 300
   currentHealth: 0
   sinkSpeed: 2.5
-  scoreValue: 10
+  scoreValue: 70
   deathClip: {fileID: 8300000, guid: d8d160451babea24bbc6fc447253c841, type: 3}
+  manager: {fileID: 0}
 --- !u!82 &4673528767107113776
 AudioSource:
   m_ObjectHideFlags: 0
