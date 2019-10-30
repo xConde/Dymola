@@ -99,7 +99,7 @@ public class PlayerShooting : MonoBehaviour
         currentWeapon = weapon.currentWeapon;
 
         int damageMultiplier = 2;
-        int speedMultiplier = Random.Range(1, 3);
+        float speedMultiplier = Random.Range(1, 3);
 
         if (currentWeapon == "Pistol")
         {
