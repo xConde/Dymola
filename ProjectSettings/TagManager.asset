@@ -24,6 +24,10 @@ TagManager:
   - RifleUI
   - Pistol
   - Rifle
+  - Subpanel
+  - musicslider
+  - MainMenuButton
+  - Data
   layers:
   - Default
   - TransparentFX
