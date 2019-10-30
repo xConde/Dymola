@@ -20,8 +20,11 @@ public class KayaHealth : MonoBehaviour
     KayaAttack attack;
     PlayerShooting shooting;
     bool isDead;                                               
-    bool damaged;                                               
+    bool damaged;
 
+    //invicibility - used as a power up or a cool down from dmg
+    bool isInvincible;
+    public float takeDamageCoolDown = 1.3f;
 
     void Awake()
     {
@@ -46,12 +49,35 @@ public class KayaHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        damaged = true;
-        currentHealth -= amount;
-        healthSlider.value = currentHealth;
-        playerAudio.Play();
-        if (currentHealth <= 0 && !isDead)
-            Death();
+        if (!isInvincible)
+        {
+            recentlyTookDamage();
+            damaged = true;
+            currentHealth -= amount;
+            healthSlider.value = currentHealth;
+            playerAudio.Play();
+            if (currentHealth <= 0 && !isDead)
+                Death();
+        }
+    }
+
+    void recentlyTookDamage() 
+    {
+        isInvincible = true;
+        Invoke("notInvicible", takeDamageCoolDown);
+    }
+
+    public void powerUpInvicible(float duration)
+    {
+        if (isInvincible)
+            CancelInvoke("notInvincibile");
+        isInvincible = true;
+        Invoke("notInvincible", duration);
+    }
+
+    void notInvicible()
+    {
+        isInvincible = false;
     }
 
 

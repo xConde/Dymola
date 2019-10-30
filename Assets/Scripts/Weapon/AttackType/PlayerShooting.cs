@@ -20,8 +20,22 @@ public class PlayerShooting : MonoBehaviour
     public Pause pause;
 
 
+    public WeaponManagement weapon;
+    string currentWeapon;
+
+    //pistol preset
+    int pistolDamagePerShot = 12;
+    float pistolTimeBetweenShot = .7f;
+
+    //rifle preset
+    int rifleDamagePerShot = 7;
+    float rifleTimeBetweenShot = .35f;
+
+
     void Awake()
     {
+        weapon = GetComponent<WeaponManagement>();
+
         shootableMask = LayerMask.GetMask("Shootable");
         pause = GetComponent<Pause>();
         magicParticles = GetComponent<ParticleSystem>();
@@ -79,4 +93,40 @@ public class PlayerShooting : MonoBehaviour
         else
             magicLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
     }
+
+    public void powerUpWeaponDamage(float duration)
+    {
+        currentWeapon = weapon.currentWeapon;
+
+        int damageMultiplier = 2;
+        int speedMultiplier = Random.Range(1, 3);
+
+        if (currentWeapon == "Pistol")
+        {
+            resetPistol();
+            timeBetweenShot *= speedMultiplier;
+            damagePerShot *= damageMultiplier;
+            Invoke("resetPistol", duration);
+        }
+        else if (currentWeapon == "Rifle") {
+            resetRifle();
+            timeBetweenShot *= speedMultiplier;
+            damagePerShot *= damageMultiplier;
+            Invoke("resetRifle", duration);
+        }
+    }
+
+    private void resetRifle()
+    {
+        damagePerShot = rifleDamagePerShot;
+        timeBetweenShot = rifleTimeBetweenShot;
+    }
+
+    private void resetPistol()
+    {
+        damagePerShot = pistolDamagePerShot;
+        timeBetweenShot = pistolTimeBetweenShot;
+
+    }
+
 }

@@ -14,6 +14,7 @@ public class GameOver : MonoBehaviour
 
     void Awake()
     {
+        Cursor.visible = false;
         anim = GetComponent<Animator>();
     }
 

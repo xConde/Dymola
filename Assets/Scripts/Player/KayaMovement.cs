@@ -5,6 +5,7 @@ using UnityEngine;
 public class KayaMovement : MonoBehaviour
 {
     public float speed = 5f;
+    public float startingSpeed = 5f;
 
     Vector3 movement;
 
@@ -78,7 +79,18 @@ public class KayaMovement : MonoBehaviour
         bool moving = h != 0f || v != 0f;
 
         anim.SetBool("IsMoving", moving);
+    }
 
+    public void powerUpSpeed(float duration)
+    {
+        float speedMultiplier = Random.Range(1, 3);
 
+        speed *= speedMultiplier;
+        Invoke("resetSpeed", duration);
+    }
+
+    private void resetSpeed()
+    {
+        speed = startingSpeed;
     }
 }
