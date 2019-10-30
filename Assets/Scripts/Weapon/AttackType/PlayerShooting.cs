@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public int damagePerShot = 7;                  
+    public float damagePerShot = 7;                  
     public float timeBetweenShot = .8f;        
     public float range = 200f;                      
 
@@ -98,8 +98,8 @@ public class PlayerShooting : MonoBehaviour
     {
         currentWeapon = weapon.currentWeapon;
 
-        int damageMultiplier = 2;
-        float speedMultiplier = Random.Range(1, 3);
+        float damageMultiplier = Random.Range(.5f, 3);
+        float speedMultiplier = Random.Range(.5f, 3);
 
         if (currentWeapon == "Pistol")
         {

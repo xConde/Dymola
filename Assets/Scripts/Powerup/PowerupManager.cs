@@ -24,6 +24,6 @@ public class PowerupManager : MonoBehaviour
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
         int powerupType = Random.Range(0, powerup.Length);
 
-        Instantiate(powerup[0], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        Instantiate(powerup[powerupType], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
 }
