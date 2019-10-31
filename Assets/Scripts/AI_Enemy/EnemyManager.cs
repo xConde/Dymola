@@ -8,25 +8,26 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] enemy;          //Charles, RatGuy, Mr Tank === by ranking of 60%, 30%, 10%
     public float spawnTime = 3f;        //Time between each enemy spawn
     public Transform[] spawnPoints;     //Quantity of spawns available to spawn enemies
+    public int currentWave;
 
     // Waves Information
     int totalWaves = 90;
     int totalEnemiesInCurrentWave;      
     int enemiesInWaveLeft;              //totalEnemiesinCurrentWave - deadEnemies
     int spawnedEnemies;                 //Enemies currently spawned on current wave
-    public int currentWave;
     int enemiesKilledInWave;
 
     // Enemy spawn quantity & quality
-    int initalSpawnAmount = 10;
-    int spawnMultiplier;
-    public int[] enemyQuantity = new int[3]; 
-    public double[] enemyPercent = { .6, .3, .09 };
+    float initalSpawnAmount = 10;
+    float spawnMultiplier;
+    int[] enemyQuantity = new int[3]; 
+    double[] enemyPercent = { .6, .3, .09 };
 
 
     void Start()
     {
         currentWave = 0;
+        spawnMultiplier = 0;
         StartNextWave();
     }
 
@@ -37,9 +38,9 @@ public class EnemyManager : MonoBehaviour
         if (currentWave > totalWaves)
             return;
         //spawnMultipler, increases enemies per wave
-        spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * (currentWave / 5));
+        spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * currentWave / 5);
         //totalEnemiesInCurrentWave carries the value of enemies quantity
-        totalEnemiesInCurrentWave = spawnMultiplier;
+        totalEnemiesInCurrentWave = (int) spawnMultiplier;
         EnemiesLeft.totalEnemies = totalEnemiesInCurrentWave;
         EnemiesLeft.enemiesLeft = totalEnemiesInCurrentWave;
 
