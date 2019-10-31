@@ -28,13 +28,13 @@ public class PlayerShooting : MonoBehaviour
     float pistolTimeBetweenShot = 1f;
 
     //rifle preset
-    int rifleDamagePerShot = 10;
+    int rifleDamagePerShot = 12;
     float rifleTimeBetweenShot = .35f;
 
 
     void Awake()
     {
-        weapon = GetComponent<WeaponManagement>();
+        weapon = FindObjectOfType<WeaponManagement>();
 
         shootableMask = LayerMask.GetMask("Shootable");
         pause = GetComponent<Pause>();

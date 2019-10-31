@@ -8,6 +8,7 @@ public class Powerups : MonoBehaviour
     public PlayerShooting shoot;
     public KayaHealth health;
     public KayaMovement movement;
+    public GameObject pickupEffect;
 
     public float powerUpDuration = 10f;
 
@@ -15,7 +16,7 @@ public class Powerups : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");          //player
         health = player.GetComponent<KayaHealth>();         //health
-        shoot = player.GetComponent<PlayerShooting>();      //shooting
+        shoot = FindObjectOfType<PlayerShooting>();      //shooting
         movement = player.GetComponent<KayaMovement>();     //movement
     }
 
@@ -28,27 +29,35 @@ public class Powerups : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            if (gameObject.tag.Equals("PowerUpHeal"))
-                powerUpHeal();
-            else if (gameObject.tag.Equals("PowerUpInvincible"))
-                powerUpInvincible();
-            else if (gameObject.tag.Equals("PowerUpSpeed"))
-                powerUpSpeed();
-            else if (gameObject.tag.Equals("powerUpDamageBoost"))
-                powerUpDamageBoost();
-
+            pickup();
             selfDestruct();
         }
+    }
+
+    void pickup()
+    {
+        //pickup effect
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+
+        if (gameObject.tag.Equals("PowerUpHeal"))
+            powerUpHeal();
+        else if (gameObject.tag.Equals("PowerUpInvincible"))
+            powerUpInvincible();
+        else if (gameObject.tag.Equals("PowerUpSpeed"))
+            powerUpSpeed();
+        else if (gameObject.tag.Equals("PowerUpDamageBoost"))
+            powerUpDamageBoost();
     }
 
     void powerUpHeal()
     {
         health.currentHealth = health.startingHealth;
+        health.setSliderBar();
     }
 
     void powerUpInvincible()
     {
-        health.powerUpInvicible(powerUpDuration);
+        health.powerUpInvincible(powerUpDuration);
     }
 
     void powerUpSpeed()

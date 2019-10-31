@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Ground
   - Floor
-  - EnemyProjectile
-  - PlayerProjectile
   - Monster
   - PowerUpSpeed
   - PowerUpInvincible
@@ -28,6 +26,7 @@ TagManager:
   - musicslider
   - MainMenuButton
   - Data
+  - PowerUpDamageBoost
   layers:
   - Default
   - TransparentFX
