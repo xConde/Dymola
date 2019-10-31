@@ -13,14 +13,14 @@ public class EnemyManager : MonoBehaviour
     // Waves Information
     int totalWaves = 90;
     int totalEnemiesInCurrentWave;      
-    int enemiesInWaveLeft;              //totalEnemiesinCurrentWave - deadEnemies
     int spawnedEnemies;                 //Enemies currently spawned on current wave
     int enemiesKilledInWave;
 
     // Enemy spawn quantity & quality
     float initalSpawnAmount = 10;
     float spawnMultiplier;
-    int[] enemyQuantity = new int[3]; 
+    int charlesQuantity, ratguyQuantity, mrtankQuantity;
+
     double[] enemyPercent = { .6, .3, .09 };
 
 
@@ -45,13 +45,16 @@ public class EnemyManager : MonoBehaviour
         EnemiesLeft.enemiesLeft = totalEnemiesInCurrentWave;
 
         //spread enemy quantity per group
-        enemyQuantity[0] = Mathf.FloorToInt((int)(totalEnemiesInCurrentWave * enemyPercent[0]));
-        enemyQuantity[1] = Mathf.FloorToInt((int)(totalEnemiesInCurrentWave * enemyPercent[1]));
-        enemyQuantity[2] = Mathf.FloorToInt((int)(totalEnemiesInCurrentWave * enemyPercent[2]));
+        charlesQuantity = Mathf.RoundToInt((int)(totalEnemiesInCurrentWave * enemyPercent[0]));
+        ratguyQuantity = Mathf.RoundToInt((int)(totalEnemiesInCurrentWave * enemyPercent[1]));
+        mrtankQuantity = Mathf.RoundToInt((int)(totalEnemiesInCurrentWave * enemyPercent[2]));
+
+        //if we have a round error fix it by just tagging on the difference to ratguys
+        if (totalEnemiesInCurrentWave > (charlesQuantity + ratguyQuantity + mrtankQuantity))
+            ratguyQuantity += totalEnemiesInCurrentWave - (charlesQuantity + ratguyQuantity + mrtankQuantity);
 
         //preset definitions
         enemiesKilledInWave = 0;
-        enemiesInWaveLeft = 0;
         spawnedEnemies = 0;
         StartCoroutine(SpawnEnemies());
     }
@@ -60,35 +63,49 @@ public class EnemyManager : MonoBehaviour
     {
         while (spawnedEnemies < totalEnemiesInCurrentWave)
         {
-            spawnedEnemies++;
-            enemiesInWaveLeft++;
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
             //Create an instance of the enemy prefab at the randomly selected point
             int randomEnemy = roll();
-            if (enemyQuantity[randomEnemy] <= 0)
-                randomEnemy = roll();  
 
-            Instantiate(enemy[randomEnemy], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-            enemyQuantity[randomEnemy]--;
-            yield return new WaitForSeconds(spawnTime);
-
+            if (charlesQuantity > 0 && randomEnemy == 0)
+            {   //only allow enemies to spawn if they're actually being spawned. This was setting offsetting enemy quantity spawn by being outside of this for each roll
+                spawnedEnemies++; 
+                charlesQuantity--;
+                Instantiate(enemy[randomEnemy], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                yield return new WaitForSeconds(spawnTime);
+            }
+            else if (ratguyQuantity > 0 && randomEnemy == 1)
+            {
+                spawnedEnemies++;
+                ratguyQuantity--;
+                Instantiate(enemy[randomEnemy], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                yield return new WaitForSeconds(spawnTime);
+            }
+            else if (mrtankQuantity > 0 && randomEnemy == 2)
+            {
+                spawnedEnemies++;
+                mrtankQuantity--;
+                Instantiate(enemy[randomEnemy], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                yield return new WaitForSeconds(spawnTime);
+            }
+            else
+                roll();
         }
     }
 
     int roll()
     {
-        return Random.Range(0, enemyQuantity.Length);
+        return Random.Range(0, 3);
     }
 
     public void EnemyDefeated()
     {
-        enemiesInWaveLeft--;
         enemiesKilledInWave++;
         int remaining = totalEnemiesInCurrentWave - enemiesKilledInWave;
-        EnemiesLeft.enemiesLeft = remaining;
+        EnemiesLeft.enemiesLeft = remaining; //post remaining on UI canvas
 
-        if (enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
+        if (enemiesKilledInWave == totalEnemiesInCurrentWave && spawnedEnemies == totalEnemiesInCurrentWave)
             StartNextWave();
     }
 

@@ -2780,8 +2780,8 @@ MonoBehaviour:
   playerHealth: {fileID: 1266488447}
   enemy:
   - {fileID: 2465711793605133413, guid: 3188ad303102ca24e8dbc097cc0d0412, type: 3}
-  - {fileID: 4674725814272709723, guid: 7197a9a903d37d94fa96ef710c6acb4e, type: 3}
   - {fileID: 8366101791007011353, guid: f43300aaad78e5d46a301b0ba75501d4, type: 3}
+  - {fileID: 4674725814272709723, guid: 7197a9a903d37d94fa96ef710c6acb4e, type: 3}
   spawnTime: 3
   spawnPoints:
   - {fileID: 893758935}
@@ -2790,11 +2790,6 @@ MonoBehaviour:
   - {fileID: 964269077}
   - {fileID: 627425320}
   currentWave: 0
-  enemyQuantity: 000000000000000000000000
-  enemyPercent:
-  - 0.6
-  - 0.3
-  - 0.09
 --- !u!4 &148540242
 Transform:
   m_ObjectHideFlags: 0
