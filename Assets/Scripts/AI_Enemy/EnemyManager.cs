@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     int enemiesKilledInWave;
 
     // Enemy spawn quantity & quality
-    int initalSpawnAmount = 1;
+    int initalSpawnAmount = 10;
     int spawnMultiplier;
     public int[] enemyQuantity = new int[3]; 
     public double[] enemyPercent = { .6, .3, .09 };
