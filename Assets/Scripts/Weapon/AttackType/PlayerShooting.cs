@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public float damagePerShot = 7;                  
+    public float damagePerShot = 16;                  
     public float timeBetweenShot = .8f;        
     public float range = 200f;                      
 
@@ -24,11 +24,11 @@ public class PlayerShooting : MonoBehaviour
     string currentWeapon;
 
     //pistol preset
-    int pistolDamagePerShot = 12;
-    float pistolTimeBetweenShot = .7f;
+    int pistolDamagePerShot = 30;
+    float pistolTimeBetweenShot = 1f;
 
     //rifle preset
-    int rifleDamagePerShot = 7;
+    int rifleDamagePerShot = 10;
     float rifleTimeBetweenShot = .35f;
 
 
@@ -104,13 +104,13 @@ public class PlayerShooting : MonoBehaviour
         if (currentWeapon == "Pistol")
         {
             resetPistol();
-            timeBetweenShot *= speedMultiplier;
+            timeBetweenShot /= speedMultiplier;
             damagePerShot *= damageMultiplier;
             Invoke("resetPistol", duration);
         }
         else if (currentWeapon == "Rifle") {
             resetRifle();
-            timeBetweenShot *= speedMultiplier;
+            timeBetweenShot /= speedMultiplier;
             damagePerShot *= damageMultiplier;
             Invoke("resetRifle", duration);
         }

@@ -1483,10 +1483,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8435241
+  m_Radius: 1.0210617
   m_Height: 3.6520274
   m_Direction: 1
-  m_Center: {x: -0.05455613, y: 1.3260137, z: 0.28896797}
+  m_Center: {x: -0.015090704, y: 1.3260137, z: 0.28896797}
 --- !u!82 &8366639511345860164
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1507,7 +1507,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.062633
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
