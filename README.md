@@ -1,7 +1,7 @@
 ### Dymola, Survival-Shooter
 Second project for Game Development made in Unity, Dymola features a 3d third person survival shooter game. 
 
-Main components of Dymola include:
+#### Main components of Dymola include:
 3 Unique monsters that randomly spawn around the map. The weight of the monsters are controlled by the "EnemyManager" script for better playability.         
 
 3 Randomly generated powerups: randomized speed, invicibility, and damage modification. Also to include health regeneration. These all spawn at a random location at a time between 5 to 15 seconds apart.
