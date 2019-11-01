@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KayaMovement : MonoBehaviour
 {
-    public float speed = 5f;
-    public float startingSpeed = 5f;
+    public float speed = 6f;
+    public float startingSpeed = 6f;
+
+    public float startingEnergy = 100;
+    public float currentEnergy = 100;
+    public Slider EnergySlider;
 
     Vector3 movement;
+
+    bool hasSpeedPowerup = false;
+    bool isRunning;
 
     //animiation
     Animator anim;
@@ -22,6 +30,8 @@ public class KayaMovement : MonoBehaviour
 
     void Awake()
     {
+        isRunning = false;
+        currentEnergy = startingEnergy;
         floorMask = LayerMask.GetMask("Floor");
 
         //Animiation
@@ -29,6 +39,24 @@ public class KayaMovement : MonoBehaviour
         checkRigidBody();
     }
 
+    private void Update()
+    {
+
+        if (((Input.GetKeyDown(KeyCode.LeftShift)) && currentEnergy >= 25 && !hasSpeedPowerup && !isRunning))
+        {
+            isRunning = true;
+            currentEnergy -= 25;
+            EnergySlider.value = currentEnergy;
+            speed = 16;
+            Invoke("resetSpeed", 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && !hasSpeedPowerup)
+            resetSpeed();
+
+        currentEnergy += 3 * Time.deltaTime;
+
+        setSliderBar();
+    }
 
     void FixedUpdate()
     {
@@ -39,6 +67,7 @@ public class KayaMovement : MonoBehaviour
         Turn();
         Animiating(forwardInput, turnInput);
     }
+
 
     void Move(float h, float v)
     {
@@ -83,6 +112,9 @@ public class KayaMovement : MonoBehaviour
 
     public void powerUpSpeed(float duration)
     {
+        hasSpeedPowerup = true;
+        currentEnergy = startingEnergy;
+        EnergySlider.value = currentEnergy;
         float speedMultiplier = Random.Range(1, 3);
 
         speed *= speedMultiplier;
@@ -92,5 +124,12 @@ public class KayaMovement : MonoBehaviour
     private void resetSpeed()
     {
         speed = startingSpeed;
+        hasSpeedPowerup = false;
+        isRunning = false;
+    }
+
+    void setSliderBar()
+    {
+        EnergySlider.value = currentEnergy;
     }
 }
