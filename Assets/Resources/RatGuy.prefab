@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8501571991239372917}
   m_Layer: 12
   m_Name: kobold_soldier
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 8363761240320557125}
   m_Layer: 12
   m_Name: Bip01 Pelvis
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 8501546663201374903}
   m_Layer: 12
   m_Name: lance
-  m_TagString: EnemyWeapon
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1080,7 +1080,7 @@ GameObject:
   - component: {fileID: 8362061227205354695}
   m_Layer: 12
   m_Name: Bip01
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 8362389733515483931}
   m_Layer: 12
   m_Name: Bip01 Footsteps
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1749,7 +1749,7 @@ GameObject:
   - component: {fileID: 8363905504454681717}
   m_Layer: 12
   m_Name: root
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

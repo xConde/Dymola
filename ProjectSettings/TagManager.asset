@@ -11,9 +11,7 @@ TagManager:
   - PowerUpInvincible
   - PowerUpHeal
   - EnemyWeapon
-  - Sword
   - Maule
-  - Staff
   - Shootable
   - SwordUI
   - MauleUI
@@ -27,6 +25,10 @@ TagManager:
   - MainMenuButton
   - Data
   - PowerUpDamageBoost
+  - PowerUpHealUI
+  - PowerUpInvincibleUI
+  - PowerUpSpeedUI
+  - PowerUpDamageBoostUI
   layers:
   - Default
   - TransparentFX

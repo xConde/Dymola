@@ -4,33 +4,40 @@ using UnityEngine;
 
 public class BluntMelee : MonoBehaviour
 {
-    public float timeBetweenAttacks = 3f;
-    public int attackDamage = 24;
+    public float timeBetweenAttacks = 2f;
+    public int attackDamage = 42;
 
     Animator anim;
     GameObject monster;
     EnemyHealth enemyHealth;
     KayaHealth KayaHealth;
+    KayaAttack KayaAttack;
     bool enemyInRange;
     float timer;
+
+    AudioSource mauleeAudio;
 
 
     void Awake()
     {
-        monster = GameObject.FindGameObjectWithTag("Monster");
-        enemyHealth = monster.GetComponent<EnemyHealth>();
-        KayaHealth = GetComponent<KayaHealth>();
+
+        mauleeAudio = GetComponent<AudioSource>();
+        KayaAttack = FindObjectOfType<KayaAttack>();
+        enemyHealth = FindObjectOfType<EnemyHealth>();
+        KayaHealth = FindObjectOfType<KayaHealth>();
         anim = GetComponent<Animator>();
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HIT");
+        Debug.Log("Entered OnTriggerEnter");
+        monster = GameObject.FindGameObjectWithTag("Monster");
+
         if (other.gameObject == monster)
         {
             enemyInRange = true;
-            Debug.Log("========================== HIT ====================");
+            Debug.Log("enemyInRange set to true");
         }
     }
 
@@ -46,7 +53,7 @@ public class BluntMelee : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= timeBetweenAttacks && enemyInRange && KayaHealth.currentHealth > 0)
+        if (timer >= timeBetweenAttacks && enemyInRange && KayaHealth.currentHealth > 0 && KayaAttack.mauleAttacking)
             Attack();
     }
 
@@ -54,7 +61,8 @@ public class BluntMelee : MonoBehaviour
     void Attack()
     {
         timer = 0f;
-
+        Debug.Log("Entered Attack");
+        mauleeAudio.Play();
         if (enemyHealth.currentHealth > 0)
             enemyHealth.TakeDamage(attackDamage);
     }

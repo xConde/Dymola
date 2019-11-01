@@ -11,12 +11,15 @@ public class KayaAttack : MonoBehaviour
 
     public bool isAllowedToAttack = true;
 
+    public bool mauleAttacking;
+
     Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        mauleAttacking = false;
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class KayaAttack : MonoBehaviour
         attackInput = Input.GetAxis("Fire1");
         AnimateStatus();
         Attack();
+
     }
 
     void AnimateStatus() {
@@ -59,14 +63,17 @@ public class KayaAttack : MonoBehaviour
                 anim.SetTrigger("ShootRifle");
             }
             else if (Equals(currentweapon, "Maule"))
+            {
+                mauleAttacking = true;
                 anim.SetTrigger("Smash");
+            }
 
             isAllowedToAttack = false;
             Invoke("canDamage", 0.85f);
         }
     }
 
-    void canDamage() { isAllowedToAttack = true; }
+    void canDamage() { isAllowedToAttack = true; mauleAttacking = false; }
 
     public void updateWeapon(string weaponName) { currentweapon = weaponName; }
 }
