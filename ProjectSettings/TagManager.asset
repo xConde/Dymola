@@ -29,6 +29,8 @@ TagManager:
   - PowerUpInvincibleUI
   - PowerUpSpeedUI
   - PowerUpDamageBoostUI
+  - ShotgunUI
+  - Shotgun
   layers:
   - Default
   - TransparentFX

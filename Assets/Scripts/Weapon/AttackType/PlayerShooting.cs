@@ -25,17 +25,23 @@ public class PlayerShooting : MonoBehaviour
 
     //pistol preset
     int pistolDamagePerShot = 30;
-    float pistolTimeBetweenShot = 1f;
+    public float pistolTimeBetweenShot = 1f;
 
     //rifle preset
     int rifleDamagePerShot = 12;
-    float rifleTimeBetweenShot = .35f;
+    public float rifleTimeBetweenShot = .35f;
+
+    //shotgun preset
+    int shotgunDamagePerShot = 40;
+    public float shotgunTimeBetweenShot = 1.3f;
+
+    public bool powerupActive;
 
 
     void Awake()
     {
         weapon = FindObjectOfType<WeaponManagement>();
-
+        powerupActive = false;
         shootableMask = LayerMask.GetMask("Shootable");
         pause = GetComponent<Pause>();
         magicParticles = GetComponent<ParticleSystem>();
@@ -96,6 +102,7 @@ public class PlayerShooting : MonoBehaviour
 
     public void powerUpWeaponDamage(float duration)
     {
+        powerupActive = true;
         currentWeapon = weapon.currentWeapon;
 
         float damageMultiplier = Random.Range(.5f, 3);
@@ -108,12 +115,28 @@ public class PlayerShooting : MonoBehaviour
             damagePerShot *= damageMultiplier;
             Invoke("resetPistol", duration);
         }
-        else if (currentWeapon == "Rifle") {
+        else if (currentWeapon == "Rifle")
+        {
             resetRifle();
             timeBetweenShot /= speedMultiplier;
             damagePerShot *= damageMultiplier;
             Invoke("resetRifle", duration);
         }
+        else if (currentWeapon == "Shotgun")
+        {
+            resetShotgun();
+            timeBetweenShot /= speedMultiplier;
+            damagePerShot *= damageMultiplier;
+            Invoke("resetShotgun", duration);
+        }
+
+        powerupActive = false;
+    }
+
+    private void resetShotgun()
+    {
+        damagePerShot = shotgunDamagePerShot;
+        timeBetweenShot = shotgunTimeBetweenShot;
     }
 
     private void resetRifle()

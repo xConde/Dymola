@@ -11,15 +11,18 @@ public class KayaAttack : MonoBehaviour
 
     public bool isAllowedToAttack = true;
 
-    public bool mauleAttacking;
+    float durationperiod;
+
+    PlayerShooting shoot;
 
     Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        shoot = FindObjectOfType<PlayerShooting>();
         anim = GetComponent<Animator>();
-        mauleAttacking = false;
+        durationperiod = 0;
     }
 
     // Update is called once per frame
@@ -37,12 +40,12 @@ public class KayaAttack : MonoBehaviour
             anim.SetBool("HasPistol", true);
             anim.SetBool("HasRifle", false);
         }
-        else if (Equals(currentweapon, "Rifle"))
+        else if (Equals(currentweapon, "Rifle") || Equals(currentweapon, "Shotgun"))
         {
             anim.SetBool("HasPistol", false);
             anim.SetBool("HasRifle", true);
         }
-        else if (Equals(currentweapon, "Maule"))
+        else 
         {
             anim.SetBool("HasPistol", false);
             anim.SetBool("HasRifle", false);
@@ -56,24 +59,35 @@ public class KayaAttack : MonoBehaviour
         {
             if (Equals(currentweapon, "Pistol"))
             {
-                anim.SetTrigger("ShootPistol");
+                if (!(shoot.powerupActive))
+                    durationperiod = shoot.pistolTimeBetweenShot;
+                else
+                    durationperiod = shoot.timeBetweenShot;
+                anim.SetTrigger("ShootPistol");               
             }
             else if (Equals(currentweapon, "Rifle"))
             {
+                if (!(shoot.powerupActive))
+                    durationperiod = shoot.rifleTimeBetweenShot;
+                else
+                    durationperiod = shoot.timeBetweenShot;
                 anim.SetTrigger("ShootRifle");
             }
-            else if (Equals(currentweapon, "Maule"))
+            else if (Equals(currentweapon, "Shotgun"))
             {
-                mauleAttacking = true;
-                anim.SetTrigger("Smash");
+                if (!(shoot.powerupActive))
+                    durationperiod = shoot.shotgunTimeBetweenShot;
+                else
+                    durationperiod = shoot.timeBetweenShot;
+                anim.SetTrigger("ShootRifle");
             }
 
             isAllowedToAttack = false;
-            Invoke("canDamage", 0.85f);
+            Invoke("canDamage", durationperiod);
         }
     }
 
-    void canDamage() { isAllowedToAttack = true; mauleAttacking = false; }
+    void canDamage() { isAllowedToAttack = true; }
 
     public void updateWeapon(string weaponName) { currentweapon = weaponName; }
 }

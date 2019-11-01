@@ -53,8 +53,8 @@ public class BluntMelee : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= timeBetweenAttacks && enemyInRange && KayaHealth.currentHealth > 0 && KayaAttack.mauleAttacking)
-            Attack();
+  /*      if (timer >= timeBetweenAttacks && enemyInRange && KayaHealth.currentHealth > 0 && KayaAttack.mauleAttacking)
+            Attack();*/
     }
 
 
