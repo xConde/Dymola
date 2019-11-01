@@ -40,12 +40,5 @@ public class Pause : MonoBehaviour
         GameIsPaused = true;
     }
 
-    public void QuitGame()
-    {
-        Debug.Log("You have quit the game");
-        if (UnityEditor.EditorApplication.isPlaying == true)
-            UnityEditor.EditorApplication.isPlaying = false;
-        else
-            Application.Quit();
-    }
+
 }

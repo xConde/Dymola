@@ -32,8 +32,8 @@ public class PlayerShooting : MonoBehaviour
     public float rifleTimeBetweenShot = .35f;
 
     //shotgun preset
-    int shotgunDamagePerShot = 40;
-    public float shotgunTimeBetweenShot = 1.3f;
+    int shotgunDamagePerShot = 23;
+    public float shotgunTimeBetweenShot = 1.5f;
 
     public bool powerupActive;
 

@@ -20,7 +20,7 @@ public class KayaAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shoot = FindObjectOfType<PlayerShooting>();
+        shoot = GetComponent<PlayerShooting>();
         anim = GetComponent<Animator>();
         durationperiod = 0;
     }
@@ -58,32 +58,14 @@ public class KayaAttack : MonoBehaviour
         if (attackInput > 0 && isAllowedToAttack)
         {
             if (Equals(currentweapon, "Pistol"))
-            {
-                if (!(shoot.powerupActive))
-                    durationperiod = shoot.pistolTimeBetweenShot;
-                else
-                    durationperiod = shoot.timeBetweenShot;
                 anim.SetTrigger("ShootPistol");               
-            }
             else if (Equals(currentweapon, "Rifle"))
-            {
-                if (!(shoot.powerupActive))
-                    durationperiod = shoot.rifleTimeBetweenShot;
-                else
-                    durationperiod = shoot.timeBetweenShot;
                 anim.SetTrigger("ShootRifle");
-            }
             else if (Equals(currentweapon, "Shotgun"))
-            {
-                if (!(shoot.powerupActive))
-                    durationperiod = shoot.shotgunTimeBetweenShot;
-                else
-                    durationperiod = shoot.timeBetweenShot;
                 anim.SetTrigger("ShootRifle");
-            }
 
             isAllowedToAttack = false;
-            Invoke("canDamage", durationperiod);
+            Invoke("canDamage", 0.85f);
         }
     }
 

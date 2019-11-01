@@ -37,8 +37,15 @@ public class EnemyManager : MonoBehaviour
 
         if (currentWave > totalWaves)
             return;
+
         //spawnMultipler, increases enemies per wave
-        spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * currentWave / 5);
+        if (currentWave < 5)
+            spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * currentWave / 4);
+        else if (currentWave >= 5 && currentWave < 10)
+            spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * currentWave / 3);
+        else if (currentWave >= 15)
+            spawnMultiplier = initalSpawnAmount + (initalSpawnAmount * currentWave / 2);
+
         //totalEnemiesInCurrentWave carries the value of enemies quantity
         totalEnemiesInCurrentWave = (int) spawnMultiplier;
         EnemiesLeft.totalEnemies = totalEnemiesInCurrentWave;
@@ -52,6 +59,11 @@ public class EnemyManager : MonoBehaviour
         //if we have a round error fix it by just tagging on the difference to ratguys
         if (totalEnemiesInCurrentWave > (charlesQuantity + ratguyQuantity + mrtankQuantity))
             ratguyQuantity += totalEnemiesInCurrentWave - (charlesQuantity + ratguyQuantity + mrtankQuantity);
+
+        if (currentWave > 3 && currentWave < 7)
+            spawnTime = 2f;
+        else if (currentWave > 7)
+            spawnTime = 1f;
 
         //preset definitions
         enemiesKilledInWave = 0;
